@@ -3,11 +3,11 @@
     View,
     TouchableOpacity,
     Image,
-    // SafeAreaView,
+    SafeAreaView,
     ScrollView,
     Text,
   } from "react-native";
-  import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
+  import {useSafeAreaInsets } from "react-native-safe-area-context"
   import { Divider, Avatar } from "react-native-paper";
   import {
     Home,
@@ -32,7 +32,7 @@
       <SafeAreaView className="flex-1">
         <LinearGradient
           colors={["#4A90E2", "#A34FA0"]} // From blue-800 to purple-700
-          style={{ flex: 1, paddingTop: insets.top }}
+          style={{ flex: 1, paddingTop: insets.top + 10 }}
         >
           <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom }}>
             <View className="flex-row items-center justify-between w-full gap-2 px-4">
@@ -79,7 +79,7 @@
               <View className="p-4 flex flex-col gap-4">
                 <Text className="text-6xl font-bold">{room}</Text>
                 <Text className="text-2xl font-bold w-3/4">
-                  Research Methodology in Computer Science
+                  Student's Request
                 </Text>
                 <View className="flex flex-row gap-2 items-center">
                   <Avatar.Text size={48} label="DN" />
@@ -88,10 +88,10 @@
 
                 <Divider></Divider>
 
-                <View className="flex-row items-center gap-2">
+                {/* <View className="flex-row items-center gap-2">
                   <GraduationCap size={20} color="#666" />
-                  <Text className="text-gray-600">COMP6696001 - L5AC - LEC</Text>
-                </View>
+                  <Text className="text-gray-600">COMP6696001 | L5AC - LEC</Text>
+                </View> */}
                 {/* <Text className="text-gray-600 text-base">L5AC - LEC</Text> */}
                 <View className="flex-row items-center gap-2">
                   <Calendar size={20} color="#666" />
@@ -106,7 +106,7 @@
                 </View>
 
                 <Divider></Divider>
-                <View className="flex flex-row gap-2">
+                <View className="flex flex-row gap-2 justify-center">
                   <View className="flex flex-row items-center">
                     <Thermometer size={45} color="#666"></Thermometer>
                     <View>

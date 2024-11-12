@@ -1,64 +1,92 @@
-import EditScreenInfo from "@/components/EditScreenInfo";
+"use client";
+
+import React from "react";
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
-  StyleSheet,
-  Platform,
-  StatusBar,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
-import { ChevronDown, Menu } from "lucide-react-native";
-import { Avatar } from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { ChevronDown, FilterIcon, Menu } from "lucide-react-native";
+import { Avatar, Divider } from "react-native-paper";
+import RoomTiles from "../components/RoomTiles";
+import { Filter } from "react-native-svg";
 
 export default function TabTwoScreen() {
-  const insets = useSafeAreaInsets(); // Get the safe area insets
+  const insets = useSafeAreaInsets();
+
+  // Define an array with multiple room objects
+  const rooms = [
+    {
+      roomNo: "603",
+      username: "Davin Neilson",
+      className: "L5AC",
+      courseCode: "COMP6696001",
+      courseName: "Student's Request",
+      classType: "LEC",
+      approved: true,
+    },
+    {
+      roomNo: "604",
+      username: "Davin Neilson",
+      className: "L5AD",
+      courseCode: "COMP6688002",
+      courseName: "Student's Request",
+      classType: "LAB",
+      approved: false,
+    },
+    {
+      roomNo: "605",
+      username: "Davin Neilson",
+      className: "L5AE",
+      courseCode: "COMP6677003",
+      courseName: "Student's Request",
+      classType: "LEC",
+      approved: true,
+    },
+    // Add more room objects as needed
+  ];
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1">
       <LinearGradient
         colors={["#6B1D71", "#3A0F3D"]} // From blue-800 to purple-700
-        style={{ flex: 1, paddingTop: insets.top }}
+        style={{ flex: 1, paddingTop: insets.top + 10 }}
       >
-        <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom }}>
-          <View className="flex flex-col">
-            <View style={styles.header}>
-              <Text style={styles.title}>My Courses</Text>
-            </View>
-
-            <View style={styles.semesterSelector}>
-              <TouchableOpacity style={styles.dropdown}>
-                <Text style={styles.dropdownText}>2024, Odd Semester</Text>
-                <ChevronDown color="#000" size={24} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.menuButton}>
-                <Menu color="#000" size={24} />
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.courseCard}>
-              <Text style={styles.courseCode}>B1CC - LAB</Text>
-              <Text style={styles.courseName}>
-                Human and Computer Interaction
-              </Text>
-
-              <View className="flex flex-row items-center gap-2">
-                <Avatar.Text size={40} label="DN" />
-                <Text style={styles.instructorName}>DAVIN NEILSON</Text>
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: insets.bottom }}
+          className=""
+        >
+          <View>
+            <View className="flex flex-col">
+              <View className="p-4">
+                <Text className="text-3xl font-bold text-white">Room List</Text>
               </View>
-
-              <View style={styles.progressContainer}>
-                <Text style={styles.progressText}>Class progress:</Text>
-                <Text style={styles.progressPercentage}>2%</Text>
-                <View style={styles.progressBarBackground}>
-                  <View style={[styles.progressBarFill, { width: "2%" }]} />
-                </View>
+              <View className="flex-row items-center px-4 pb-4 gap-2">
+                <TouchableOpacity className="flex-1 flex-row items-center justify-between bg-gray-100 p-3 rounded-lg">
+                  <Text className="text-base text-gray-800">My Room</Text>
+                  <ChevronDown color="#000" size={24} />
+                </TouchableOpacity>
+                <TouchableOpacity className="bg-gray-100 p-3 rounded-lg justify-center items-center">
+                  <FilterIcon color="#000" size={24} />
+                </TouchableOpacity>
               </View>
+              {/* Map through the rooms array to render each RoomTiles component */}
+              {rooms.map((room, index) => (
+                <RoomTiles
+                  key={index} // Use index as key, though a unique id is preferable
+                  classType={room.classType}
+                  roomNo={room.roomNo}
+                  username={room.username}
+                  className={room.className}
+                  courseCode={room.courseCode}
+                  courseName={room.courseName}
+                  approved={room.approved}
+                />
+              ))}
             </View>
           </View>
         </ScrollView>
@@ -66,95 +94,3 @@ export default function TabTwoScreen() {
     </SafeAreaView>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-  },
-  header: {
-    padding: 16,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#fff",
-  },
-  semesterSelector: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-    gap: 8,
-  },
-  dropdown: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#f5f5f5",
-    padding: 12,
-    borderRadius: 8,
-  },
-  dropdownText: {
-    fontSize: 16,
-    color: "#333",
-  },
-  menuButton: {
-    backgroundColor: "#f5f5f5",
-    padding: 12,
-    borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  courseCard: {
-    backgroundColor: "#fff",
-    margin: 16,
-    padding: 16,
-    borderRadius: 12,
-    gap: 12,
-  },
-  courseCode: {
-    fontSize: 16,
-    color: "#666",
-  },
-  courseName: {
-    fontSize: 24,
-    fontWeight: "600",
-  },
-  instructorRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  instructorImage: {
-    width: 40,
-    height: 40,
-  },
-  instructorName: {
-    fontSize: 16,
-    fontWeight: "500",
-  },
-  progressContainer: {
-    gap: 4,
-  },
-  progressText: {
-    fontSize: 14,
-    color: "#666",
-  },
-  progressPercentage: {
-    fontSize: 14,
-    color: "#666",
-    position: "absolute",
-    right: 0,
-  },
-  progressBarBackground: {
-    height: 4,
-    backgroundColor: "#f0f0f0",
-    borderRadius: 2,
-    marginTop: 8,
-  },
-  progressBarFill: {
-    height: "100%",
-    backgroundColor: "#4A235A",
-    borderRadius: 2,
-  },
-});
