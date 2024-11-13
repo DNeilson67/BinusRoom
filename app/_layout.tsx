@@ -14,6 +14,7 @@ import { useColorScheme } from "@/components/useColorScheme";
 
 // Import your global CSS file
 import "../global.css";
+import RoomDetails from "./roomdetails/[roomNo]";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -60,7 +61,7 @@ function RootLayoutNav() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen
-          name="roomdetails"
+          name="roomdetails/[roomNo]"
           options={{
             presentation: "modal",
             title: "Room Details",
@@ -75,6 +76,7 @@ function RootLayoutNav() {
             }
           }}
         />
+        <Stack.Screen name="requestRoom" options={{title: "Request Room"}}></Stack.Screen>
       </Stack>
     </ThemeProvider>
   );
