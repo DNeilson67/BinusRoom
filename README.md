@@ -9,10 +9,6 @@ The repo has two parts:
 | [`frontend/`](frontend/) | Mobile app built with Expo (React Native), Expo Router and NativeWind                                |
 | [`arduino/`](arduino/)   | ESP32 firmware that reads temperature, humidity, air quality and rain, then sends them to Firebase |
 
-```
-Sensors ──> ESP32 (arduino/main.ino) ──> Firebase Realtime Database ──> Mobile app (frontend/)
-```
-
 ---
 
 ## Frontend (mobile app)
