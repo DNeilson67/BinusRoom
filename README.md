@@ -13,8 +13,6 @@ The repo has two parts:
 Sensors ──> ESP32 (arduino/main.ino) ──> Firebase Realtime Database ──> Mobile app (frontend/)
 ```
 
-> **Status:** early prototype. The firmware already writes sensor data to Firebase, but the app does not read from Firebase yet. All room, session and sensor values in the app are hard-coded placeholders, and the Request Room screen is not implemented yet.
-
 ---
 
 ## Frontend (mobile app)
@@ -125,10 +123,6 @@ Fill in these values at the top of `main.ino` before you upload it:
 #define WIFI_SSID ""      // Wi-Fi network name
 #define WIFI_PASSWORD ""  // Wi-Fi password
 ```
-
-Anonymous sign-in must be enabled in the Firebase project (Authentication → Sign-in method), because the sketch calls `Firebase.signUp` with an empty email and password.
-
-Don't commit real credentials. Keep the committed values empty.
 
 ### Data format
 
